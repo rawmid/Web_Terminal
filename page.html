@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RTM Terminal Simulation</title>
+
+<style>
+body {
+    margin: 0;
+    background: #000;
+    color: #00ff00;
+    font-family: "Courier New", monospace;
+    overflow: hidden;
+}
+
+.terminal {
+    padding: 15px;
+    white-space: pre-wrap;
+    line-height: 1.5;
+    font-size: 14px;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.loading-screen {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading-text {
+    margin-bottom: 20px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.progress-bar {
+    width: 80%;
+    max-width: 400px;
+    height: 20px;
+    border: 1px solid #00ff00;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: #00ff00;
+}
+</style>
+</head>
+
+<body>
+
+<div class="terminal" id="terminal"></div>
+
+<div class="loading-screen" id="loadingScreen">
+    <div class="loading-text" id="progressText">Initializing transfer...</div>
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+</div>
+
+<script>
+const terminal = document.getElementById("terminal");
+const loadingScreen = document.getElementById("loadingScreen");
+const progressFill = document.getElementById("progressFill");
+const progressText = document.getElementById("progressText");
+
+// Random helpers
+function rand(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function randomDelay() {
+    return rand(100, 1000); // 0.3s to 2s
+}
+
+function randomIP() {
+    return `${rand(1,255)}.${rand(0,255)}.${rand(0,255)}.${rand(1,255)}`;
+}
+
+function randomHex(len) {
+    const chars = "abcdef0123456789";
+    let str = "";
+    for (let i = 0; i < len; i++) {
+        str += chars[Math.floor(Math.random() * chars.length)];
+    }
+    return str;
+}
+
+// Generate fresh lines every page load
+function generateLines() {
+
+    const prefixes = [
+        "[BOOT]", "[NET]", "[AUTH]", "[HASH]", "[SYS]",
+        "[CACHE]", "[NODE]", "[BYPASS]", "[CORE]", "[DNS]",
+        "[STACK]", "[PROC]", "[KERNEL]", "[IO]", "[THREAD]"
+    ];
+
+    const actions = [
+        "Injecting shadow protocol",
+        "Rewriting memory sector",
+        "Escalating privilege vector",
+        "Compiling binary fragments",
+        "Decrypting secure payload",
+        "Allocating runtime buffer",
+        "Re-indexing packet stream",
+        "Scanning encrypted node",
+        "Fragmenting TCP sequence",
+        "ur internet sucks",
+        "Masking root signature",
+        "touch some grass my friend",
+        "Eating coookiesssssss",
+        "Injecting remote payload",
+        "click the mouse randomly",
+        "Mapping address space",
+        "Cross-linking data blocks",
+        "Compressing shadow archive",
+        "Noooooooooobbbbbbbbb",
+    ];
+
+    let lines = [];
+
+    for (let i = 0; i < 30; i++) {
+
+        let prefix = prefixes[rand(0, prefixes.length - 1)];
+        let action = actions[rand(0, actions.length - 1)];
+
+        let extra = "";
+
+        // Randomly attach weird technical-looking data
+        let type = rand(1, 4);
+
+        if (type === 1) extra = " :: 0x" + randomHex(16);
+        if (type === 2) extra = " @ " + randomIP();
+        if (type === 3) extra = " | HASH=" + randomHex(24);
+        if (type === 4) extra = " <PORT:" + rand(20, 9000) + ">";
+
+        lines.push(prefix + " " + action + extra + "...");
+    }
+
+    return lines;
+}
+
+
+let lines = generateLines();
+let index = 0;
+
+// Type lines with FULLY random delay
+function typeLine() {
+    if (index < lines.length) {
+        terminal.innerHTML += lines[index] + "\n";
+        terminal.scrollTop = terminal.scrollHeight;
+        index++;
+        setTimeout(typeLine, randomDelay());
+    } else {
+        setTimeout(showLoadingScreen, 1500);
+    }
+}
+
+function showLoadingScreen() {
+    terminal.innerHTML = "";
+    loadingScreen.style.display = "flex";
+    startProgress();
+}
+
+function startProgress() {
+    let percent = 0;
+
+    const interval = setInterval(() => {
+        percent++;
+        progressFill.style.width = percent + "%";
+        progressText.innerText =
+            "Redirecting encrypted packets to RTM Data Server... " + percent + "%";
+
+        if (percent >= 100) {
+            clearInterval(interval);
+            finish();
+        }
+    }, rand(20, 70)); // slightly random progress speed
+}
+
+function finish() {
+    progressText.innerText = "Transfer Complete.";
+    setTimeout(() => {
+        progressText.innerText =
+            "⚠ you know you fucked up my friend";
+    }, 1500);
+}
+
+typeLine();
+</script>
+
+</body>
+</html>
