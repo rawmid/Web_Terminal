@@ -1,4 +1,4 @@
-# RTM Data Transfer Simulator 
+# Data Transfer Simulator 
 
 Simulates a hacker-style terminal in your browser with random logs, IPs, hashes, and a loading progress bar. 
 Fun, aesthetic, and interactive.
