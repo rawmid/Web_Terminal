@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>tolibo.ulala</title>
+<title>Data transfer</title>
 
 <style>
 body {
@@ -71,13 +71,12 @@ const loadingScreen = document.getElementById("loadingScreen");
 const progressFill = document.getElementById("progressFill");
 const progressText = document.getElementById("progressText");
 
-// Random helpers
 function rand(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function randomDelay() {
-    return rand(100, 1000); // 0.1s to 1s
+    return rand(50, 500); // 0.05s to 0.5s
 }
 
 function randomIP() {
@@ -93,7 +92,7 @@ function randomHex(len) {
     return str;
 }
 
-// Generate fresh lines every page load
+
 function generateLines() {
 
     const prefixes = [
