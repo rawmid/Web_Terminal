@@ -1,10 +1,7 @@
-Here’s a short, punchy version for your GitHub README:
+# RTM Data Transfer Simulator 
 
----
-
-# RTM Data Transfer Simulator 💻⚡
-
-Simulates a hacker-style terminal in your browser with random logs, IPs, hashes, and a loading progress bar. Fun, aesthetic, and interactive.
+Simulates a hacker-style terminal in your browser with random logs, IPs, hashes, and a loading progress bar. 
+Fun, aesthetic, and interactive.
 
 **Features**
 
@@ -20,8 +17,3 @@ Open `index.html` in a browser and watch the terminal “transfer” data.
 
 **Note**: Fully simulated – no real data is transferred.
 
----
-
-If you want, I can also **make it super flashy with hacker emojis and style lines** for IG/GitHub vibes. ⚡💾
-
-Do you want me to do that too?
