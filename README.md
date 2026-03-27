@@ -11,7 +11,7 @@ Fun, aesthetic, and interactive.
 * Automatic finish messages with fallback
 
 **Usage**
-Open `index.html` in a browser and watch the terminal “transfer” data.
+[Open Live Demo](https://rawmid.github.io/Web_Terminal/)
 
 **Tech**: HTML, CSS, JavaScript
 
